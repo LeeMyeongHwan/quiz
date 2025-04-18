@@ -1,0 +1,26 @@
+quiz3 몬태카를로 시뮬레이션으로 크랩스 게임 확률 계산기( 두개의 주사위를 n번 굴려서 나오는 값 <2~12>확률 구하기)
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define count 1000000
+
+int main(void) {
+
+	int dice = 0;
+	int sum[13] = {0}; //2~12
+
+	srand(time(NULL));
+	for (int i = 0; i < count; i++){
+		dice = 0;
+		dice = (rand() % 6 + 1)+(rand()%6+1);
+	
+		sum[dice]++;
+}
+	for (int i = 2; i < 13; i++) {
+		printf("나온 회수 : %d  확률 : %5.2f\n", sum[i], (float)sum[i] / count * 100);
+
+	}
+	return 0;
+
+}
