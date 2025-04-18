@@ -1,0 +1,27 @@
+quiz4 겹치지 않는 랜덤 숫자 만들기새 창으로 메일 보기
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define uu 10
+
+int main(void) {
+	srand(time(NULL));
+	int rand_num[uu] = { 0 };
+	for (int i = 0; i < uu; i++) {
+		rand_num[i] = rand() % 10 + 1;
+	
+		for(int j=0;j<i;j++){
+			if (rand_num[i] == rand_num[j]) {
+				i--;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < uu; i++) {
+		printf("%d\n", rand_num[i]);
+	}
+
+	return 0;
+}
