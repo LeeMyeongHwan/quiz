@@ -1,59 +1,59 @@
 quiz5 카드 한벌을 랜덤하게 출력하기
 
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define CLOVER 0
 #define HEART 1
 #define SPADE 2
 #define DIAMOND 3
-//클로버 = 0~12/ 하트 = 13~25/ 스페이드 = 26~38/ 다이야몬드 = 39~51
+// 클로버 = 0~12 / 하트 = 13~25 / 스페이드 = 26~38 / 다이아몬드 = 39~51
+
 int main(void) {
+    int deck[52] = { 0 };            
+    char *suit_name = " ";          
+    int card_number = 0;             
 
-	int card_coice[52] = { 0 };
-	char *ansdid = " ";
-	int number = 0;
-	
-	
-	for (int i = 0; i <= 51; i++) {
-		card_coice[i] = i;
-		
-	}
-	srand(time(0));
-	for (int i = 51; i > 0; i--) {
-		int j = rand() % (i + 1);
-		int s = card_coice[i];
-		card_coice[i] = card_coice[j];
-		card_coice[j] = s;
-	}
+    // 덱 초기화: 0 ~ 51
+    for (int i = 0; i < 52; i++) {
+        deck[i] = i;
+    }
 
-	for (int i = 0; i <= 51; i++) {
-		printf("%d\n", card_coice[i]);
-		switch (card_coice[i]/13)
-		{
+    // 셔플 
+    srand(time(0));
+    for (int i = 51; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
 
-		case CLOVER:
-			ansdid = "CLOVER";
-			break;
-		case HEART:
-			ansdid = "HEART";
-			break;
-		case SPADE:
-			ansdid = "SPADE";
-			break;
-		case DIAMOND:
-			ansdid = "DIAMOND";
-			break;
+    for (int i = 0; i < 52; i++) {
+        int card = deck[i];
 
-		default:
-			break;
-		}
-		number = card_coice[i] % 13 + 1;
-		printf("%s %d\n", ansdid, number);
-	}
+        switch (card / 13) {
+            case CLOVER:
+                suit_name = "CLOVER";
+                break;
+            case HEART:
+                suit_name = "HEART";
+                break;
+            case SPADE:
+                suit_name = "SPADE";
+                break;
+            case DIAMOND:
+                suit_name = "DIAMOND";
+                break;
+            default:
+                suit_name = "UNKNOWN";
+                break;
+        }
 
+        card_number = card % 13 + 1;
+        printf("%s %d\n", suit_name, card_number);
+    }
 
-	return 0;
+    return 0;
 }
