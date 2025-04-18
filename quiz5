@@ -1,0 +1,59 @@
+quiz5 카드 한벌을 랜덤하게 출력하기
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+#define CLOVER 0
+#define HEART 1
+#define SPADE 2
+#define DIAMOND 3
+//클로버 = 0~12/ 하트 = 13~25/ 스페이드 = 26~38/ 다이야몬드 = 39~51
+int main(void) {
+
+	int card_coice[52] = { 0 };
+	char *ansdid = " ";
+	int number = 0;
+	
+	
+	for (int i = 0; i <= 51; i++) {
+		card_coice[i] = i;
+		
+	}
+	srand(time(0));
+	for (int i = 51; i > 0; i--) {
+		int j = rand() % (i + 1);
+		int s = card_coice[i];
+		card_coice[i] = card_coice[j];
+		card_coice[j] = s;
+	}
+
+	for (int i = 0; i <= 51; i++) {
+		printf("%d\n", card_coice[i]);
+		switch (card_coice[i]/13)
+		{
+
+		case CLOVER:
+			ansdid = "CLOVER";
+			break;
+		case HEART:
+			ansdid = "HEART";
+			break;
+		case SPADE:
+			ansdid = "SPADE";
+			break;
+		case DIAMOND:
+			ansdid = "DIAMOND";
+			break;
+
+		default:
+			break;
+		}
+		number = card_coice[i] % 13 + 1;
+		printf("%s %d\n", ansdid, number);
+	}
+
+
+	return 0;
+}
